@@ -50,11 +50,12 @@ class UserCreateForm(UserCreationForm):
 class UserUpdateForm(forms.ModelForm):
     """ユーザー情報更新フォーム"""
 
-    top_image = forms.ImageField(widget=forms.FileInput)
+    forms.ImageField(widget=forms.FileInput)
+
     class Meta:
         model = User
-        fields = ('nick_name','top_image','twitter','instagram',
-                  'skill','area','request_fee','portfolio','self_introduction')#画像はあとで解決する
+        fields = ('nick_name', 'top_image', 'twitter', 'instagram',
+                  'skill', 'area', 'request_fee', 'portfolio', 'self_introduction')#画像はあとで解決する
         widgets = {
             'self_introduction': forms.Textarea(attrs={'cols': 40, 'rows': 10}),
             'portfolio': forms.Textarea(attrs={'cols': 40, 'rows': 10})

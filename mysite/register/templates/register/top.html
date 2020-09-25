@@ -8,13 +8,16 @@
             <p class="text-center"><span class="bg-white text-primary">＼新着フリーランス一覧／</span></p>
         </div>
         {% for product in user_list %}
+
         <div class="col-6 col-md-6">
             <div class="datail" data-toggle="modal" data-target="#{{ product.id }}">
             <div class="card mb-3" style="max-width: 500px;">
                 <div class="row no-gutters">
                     <div class="col-md-4">
                         <div class="img-thumbnail">
-                        <img src="{{ product.top_image.url }}" class="aaa" width="100%" heught="100%">
+                            {% if product.top_image %}
+                            <img src="{{ product.top_image.url }}" class="aaa" width="100%" heught="100%">
+                            {% endif %}
                         </div>
                     </div>
                     <div class="col-md-8">
@@ -43,9 +46,11 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col">
-                                    <div class="text-center">
-                                        <img src="{{ product.top_image.url }}" class="rounded-circle" alt="参考画像" style="width:auto; height:200px" >
-                                    </div>
+                                     {% if product.top_image %}
+                                     <div class="text-center">
+                                         <img src="{{ product.top_image.url }}" class="rounded-circle" alt="参考画像" style="width:auto; height:200px" >
+                                     </div>
+                                     {% endif %}
                                 </div>
                             </div>
                             <div class="row">

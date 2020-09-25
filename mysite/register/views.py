@@ -36,6 +36,7 @@ class AistView(generic.ListView):
 
 class ListView(generic.ListView):
     model = User
+
     template_name = 'register/top.html'
     paginate_by = 8
 

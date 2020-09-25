@@ -122,13 +122,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=150, blank=True)
     nick_name = models.CharField(_('ニックネーム'), max_length=30, blank=False)
-    image = models.ImageField(('トップ画像'), upload_to='media/', blank=True)  # 画像はあとで解決する
-    twitter = models.URLField(('Twitterアカウント'), blank=True)
-    instagram = models.URLField(('Instagramアカウント'), max_length=150, blank=True)
-    skill = models.CharField(('スキル'), max_length=150, choices=SKILLS, blank=True)
-    area = models.CharField(('活動範囲'), max_length=150, choices=AREAS, blank=False)
-    request_fee = models.CharField(('依頼料'), max_length=20, choices=REQUESTS, blank=False)
-    portfolio = models.CharField(('ポートフォリオ'), max_length=150, blank=True)
+    top_image = models.ImageField(_('トップ画像'), upload_to='media/', blank=True)  # 画像はあとで解決する
+    twitter = models.URLField(_('Twitterアカウント'), blank=True)
+    instagram = models.URLField(_('Instagramアカウント'), max_length=150, blank=True)
+    skill = models.CharField(_('スキル'), max_length=150, choices=SKILLS, blank=True)
+    area = models.CharField(_('活動範囲'), max_length=150, choices=AREAS, blank=False)
+    request_fee = models.CharField(_('依頼料'), max_length=20, choices=REQUESTS, blank=False)
+    portfolio = models.CharField(_('ポートフォリオ'), max_length=150, blank=True)
     self_introduction = models.CharField(_('自己PR'), max_length=500, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
 
@@ -181,3 +181,20 @@ class User(AbstractBaseUser, PermissionsMixin):
         メールアドレスを返す
         """
         return self.email
+
+
+
+    def save_and_rename(self, url, name=None):
+
+        """画像保存"""
+        res = requests.get(url)
+        if res.status_code != 200:
+            return "No Image"
+        path = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/media/image/"
+        if name == None:
+            path += url.split("/")[-1]
+        else:
+            path += name
+        with open(path, 'wb') as file:
+            file.write(res.content)
+        return path
