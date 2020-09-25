@@ -42,3 +42,15 @@
   font-size: 40px;/*アイコンサイズ*/
   line-height: 50px;/*高さと合わせる*/
 }
+
+
+.card-img-top {/* cardの画像をレスポンシブルにする設定 */
+  width: 100%;
+  height: 200px;
+  object-fit: contain; /* この一行を追加するだけ！ */
+}
+
+
+.card {/* カードの長さ */
+  height: 350px;
+}
