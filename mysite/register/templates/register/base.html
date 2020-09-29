@@ -16,27 +16,31 @@
 
 <!-- ナビバーデザインテストー -->
 <nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
-    <div class="row">
-        <div class="col-4 col-md-4 order-md-0">
+    <div class="row m-auto">
+        <div class="col-4 col-sm-4 order-sm-0">
             <a class="navbar-brand" href="{% url 'register:top' %}">ほげほげ</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
-        <div class="col-8 col-md-8 order-md-3">
+        <div class="col-8 col-sm-8 order-sm-3">
             <div class="float-right">
                 <button type="button" class="btn btn-primary">テスト</button>
                 <button type="button" class="btn btn-primary">ログイン</button>
                 <button type="button" class="btn btn-primary">会員登録</button>
             </div>
         </div>
-        <div class="col-12 col-md-8 order-md-1">
-            <form class="form-inline my-2 my-lg-0" action="/search" method="get" accept-charset="utf-8">
-                <input type="search" class="form-control mr-sm-2" placeholder="キーワードで検索" name="q" aria-label="検索...">
-                <button type="submit" class="btn btn-outline-info my-2 my-sm-0">検索</button>
-            </form>
+        <div class="col-12 col-sm-8 order-sm-1">
+            <div class="float-sm-right">
+                <form class="form-inline my-2 my-lg-0" action="/search" method="get" accept-charset="utf-8">
+                    <div class="form-group mb-0">
+                        <input id="form" type="search" class="col-12 form-control mr-sm-2" placeholder="キーワードで検索" name="q" aria-label="検索...">
+                    </div>
+                    <button type="submit" class="btn btn-outline-info my-2 my-sm-0">検索</button>
+                </form>
+            </div>
         </div>
-        <div class="col-md-4 order-md-2">
+        <div class="col-12 col-sm-4 order-sm-2">
             <button type="button" class="btn btn-primary">カテゴリー</button>
         </div>
     </div>
@@ -100,23 +104,24 @@
 
 <!-- top画像ー -->
 <img class="img-fluid" src="/media/freelanze-top-image.png" style="margin-top: 55px">
+
+<!-- メインコンテンツ -->
 <main>
-    <!-- メインコンテンツ -->
     <div class="container mt-auto">
         {% block content %}{% endblock %}
     </div>
 </main>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
-            integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
-            integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
-            crossorigin="anonymous"></script>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
 </body>
 </html>
