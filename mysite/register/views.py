@@ -55,6 +55,10 @@ class DetailView(generic.DetailView):
     template_name = 'register/top.html'
 
 
+class SignUp(LoginView):
+    """会員登録ページ(sign upページ)"""
+    template_name = 'register/sign_up.html'
+
 class Login(LoginView):
     """ログインページ"""
     form_class = LoginForm

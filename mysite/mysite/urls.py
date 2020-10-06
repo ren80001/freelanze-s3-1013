@@ -7,7 +7,8 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('register.urls')),
-    path('auth/', include('social_django.urls', namespace='social')),  # <- Here
+    path('auth/', include('social_django.urls', namespace='social')),  # <- Here#　
+    path('', include('social_django.urls')),
 
 ]
 

@@ -54,3 +54,58 @@
 .card {/* カードの長さ */
   height: 350px;
 }
+
+body{/* 背景色指定 */
+  background-color:#f4f4f4;
+}
+
+.button_text_size1{/* 会員登録ページ内の文字サイズ */
+  font-size: small;
+  padding-top: 7px;
+}
+
+.button_text_size2{/* ログインページの登録、ログインボタンテキスト */
+  text-align: center;
+  line-height: 25px;
+  font-size: small;
+}
+
+.input_size1{/* ログインページのメール入力フォーム位置調整 */
+  width: 80%;
+  margin: 0 auto;
+  max-width: 500px;
+}
+
+.field_label1{/* 会員情報入力ページのラベル位置調整 */
+  padding-right: 205px;
+}
+
+.field_label2{/* 会員情報入力ページのラベル位置調整 */
+  padding-right: 190px;
+}
+
+.field_label3{/* 会員情報入力ページのラベル位置調整 */
+  padding-right: 218px;
+}
+
+.field_label4{/* 会員情報入力ページのラベル位置調整 */
+  padding-right: 160px;
+}
+
+.field_label5{/* 会員情報入力ページのラベル位置調整 */
+  padding-right: 196px;
+}
+
+.text_title1{/* 会員情報入力ページ */
+  padding-right: 230px;
+  font-weight: 600;
+}
+
+.text3{/* 会員情報入力ページ */
+  font-size: 12px;
+}
+
+.help_text1{/* 会員情報入力ページ */
+  font-size: 12px;
+  color: red;
+}

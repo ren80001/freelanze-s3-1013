@@ -5,6 +5,8 @@ from django.contrib.auth.base_user import AbstractBaseUser
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 from django.contrib.auth.base_user import BaseUserManager
+"""下記likeモデル"""
+from django.contrib.auth import get_user_model
 
 
 SKILLS = (
@@ -122,7 +124,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=150, blank=True)
     nick_name = models.CharField(_('ニックネーム'), max_length=30, blank=False)
-    top_image = models.ImageField(_('トップ画像'), upload_to='media/', blank=True)  # 画像はあとで解決する
+    top_image = models.ImageField(_('トップ画像'), upload_to='media/', blank=True)
     twitter = models.URLField(_('Twitterアカウント'), blank=True)
     instagram = models.URLField(_('Instagramアカウント'), max_length=150, blank=True)
     skill = models.CharField(_('スキル'), max_length=150, choices=SKILLS, blank=True)
@@ -198,3 +200,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         with open(path, 'wb') as file:
             file.write(res.content)
         return path
+
+class Likes(models.Model):
+    """Likeモデル"""
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)

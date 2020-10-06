@@ -34,7 +34,7 @@ class UserCreateForm(UserCreationForm):
     """ユーザー登録用フォーム"""
     class Meta:
         model = User
-        fields = ('email',)
+        fields = ('nick_name', 'email', 'last_name', 'first_name')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -55,7 +55,7 @@ class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('nick_name', 'top_image', 'twitter', 'instagram',
-                  'skill', 'area', 'request_fee', 'portfolio', 'self_introduction')#画像はあとで解決する
+                  'skill', 'area', 'request_fee', 'portfolio', 'self_introduction')
         widgets = {
             'self_introduction': forms.Textarea(attrs={'cols': 40, 'rows': 10}),
             'portfolio': forms.Textarea(attrs={'cols': 40, 'rows': 10})
