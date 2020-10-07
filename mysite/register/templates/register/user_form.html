@@ -1,27 +1,52 @@
-<!-- マイページ -->
+<!-- マイプロフィール編集 -->
 
 {% extends "register/base.html" %}
 {% block content %}
-<form action="" method="POST" enctype="multipart/form-data">
-    {{ form.non_field_errors }}
-    <div class="container">
+
+<div class="container">
     <div class="row">
-        <div class="col-6">
-            <th><label for="{{ form.top_image.label }}">{{ form.top_image.label }}</label></th>
-                <td>{{ form.top_image }}</td>
+        <div class="col-1 col-md-2"></div>
+        <div class="col-10 col-md-8 h-25">
+            <div class="text-center">
+                <h3 class="my-5">Freelanze</h3>
+            </div>
         </div>
-        <div class="col-6">
-        </div>
+        <div class="col-1 col-md-2"></div><!--  コンテナサイズ調整用からコンテナ -->
     </div>
+
     <div class="row">
-        <div class="col-6">
-            <tr>
-                <th><label for="{{ form.last_name.label }}">{{ form.last_name.label }}</label></th>
-                <td>{{ form.last_name }}</td>
-            </tr>
+        <div class="col-1 col-md-2"></div>
+        <div class="card col-10 col-md-8 h-25">
+            <div class="card-body text-center">
+                <h3 class="card-title my-3">マイプロフィール編集</h3>
+            </div>
         </div>
-        <div class="col-6">
-            <tr>
+        <div class="col-1 col-md-2"></div><!--  コンテナサイズ調整用からコンテナ -->
+    </div>
+
+    <div class="row">
+        <div class="col-1 col-md-2"></div><!--  コンテナサイズ調整用からコンテナ -->
+        <div class="card col-10 col-md-8 h-25">
+            <div class="card-body">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {{ form.non_field_errors }}
+                    <div class="cord-body">
+                        <div class="top_image row"><img src="{{ user.top_image.url }}" class="img-fluid"></div>
+                        <div class="change_top_image row">{{ form.top_image }}</div>
+                    </div>
+
+
+
+
+                        <div class="row">
+                            <div class="col-6">
+                                <tr>
+                                    <th><label for="{{ form.last_name.label }}">{{ form.last_name.label }}</label></th>
+                                    <td>{{ form.last_name }}</td>
+                                </tr>
+                            </div>
+                            <div class="col-6">
+                                <tr>
                 <th><label for="{{ form.first_name.label }}">{{ form.first_name.label }}</label></th>
                 <td>{{ form.first_name }}</td>
             </tr>
@@ -93,5 +118,27 @@
     {% csrf_token %}
 <button type="submit" class="btn btn-success btn-lg" >編集を確定</button>
 </form>
+
+
+
+            </div>
+        </div>
+        <div class="col-1 col-md-2"></div><!--  コンテナサイズ調整用からコンテナ -->
+    </div>
+
+    <div class="row">
+        <div class="col-1 col-md-2"></div><!--  コンテナサイズ調整用からコンテナ -->
+        <div class="col-10 col-md-8 h-25">
+            <div class="text-center">
+                <h6 class="my-5">プロフィールを充実させて、<br>{{ user.nick_name }}さんを最大限アピールしましょう。</h6>
+            </div>
+        </div>
+        <div class="col-1 col-md-2"></div><!--  コンテナサイズ調整用からコンテナ -->
+    </div>
+</div>
+
+
+
+
 
 {% endblock %}

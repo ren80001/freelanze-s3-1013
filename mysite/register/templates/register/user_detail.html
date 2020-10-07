@@ -26,6 +26,7 @@
         </div>
         <div class="col-1 col-md-2"></div><!--  コンテナサイズ調整用からコンテナ -->
     </div>
+
     <div class="row">
         <div class="col-1 col-md-2"></div>
         <div class="card col-10 col-md-8 h-25">
@@ -40,20 +41,23 @@
         <div class="col-1 col-md-2"></div><!--  コンテナサイズ調整用からコンテナ -->
         <div class="card col-10 col-md-8 h-25">
             <div class="card-body">
-                <div class="card-body py-2 text-center bg-primary">
+                <div class="card-body py-2 text-center bg-primary" id="top">
                     <div class="top_image row"><img src="{{ user.top_image.url }}" class="img-fluid"></div>
                     <div class="nick_name"><h4>{{ user.nick_name }}</h4></div>
                     <div class="name"><h6>{{ user.last_name }} {{ user.first_name }}</h6></div>
                 </div>
+
                 <div class="card-body py-5">
                     <div class="pr row"><h3>概要</h3></div>
                     <div class="pr row">{{ user.self_introduction | linebreaksbr}}</div>
                 </div>
                 <div class="card-body py-2">
                     <div class="pf row"><h3>作品など</h3></div>
+                    {% if user.portfolio %}
                     <div class="pf row">{{ user.portfolio | linebreaksbr}}</div>
+                    {% endif %}
                 </div>
-                <div class="card-body py-2">
+                <div class="card-body py-4">
                     <div class="job row">
                         <h4>
                         職種：{{ user.get_skill_display }}<br>
@@ -62,7 +66,13 @@
                         </h4>
                     </div>
                 </div>
-                <div class="card-body py-4 text-center">
+                    {% if user.twitter %}
+                    <a href="{{ user.twitter }}"><i class="fab fa-twitter fa-3x my-example fa-fw"></i></a>
+                    {% endif %}
+                    {% if user.instagram %}
+                    <a href="{{ user.instagram }}"><i class="fab fa-instagram fa-3x my-example fa-fw"></i></a>
+                    {% endif %}
+                <div class="card-body py-5 text-center">
                     <a href="{% url 'register:user_update' user.pk %}" class="btn btn-danger btn-lg" style="width:300px;">
                         <div class="button_text_size3">内容を編集する</div>
                     </a>
