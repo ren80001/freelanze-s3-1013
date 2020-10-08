@@ -1,14 +1,25 @@
-<!-- マイプロフィール編集 -->
+{% load static %}
+<!doctype html>
+<html lang="ja">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <title>Freelanze - プロフィール編集</title>
+</head>
 
-{% extends "register/base.html" %}
-{% block content %}
-
+<body>
 <div class="container">
     <div class="row">
         <div class="col-1 col-md-2"></div>
         <div class="col-10 col-md-8 h-25">
             <div class="text-center">
-                <h3 class="my-5">Freelanze</h3>
+                <a href="{% url 'register:top' %}"><h3 class="my-5">Freelanze</h3></a>
             </div>
         </div>
         <div class="col-1 col-md-2"></div><!--  コンテナサイズ調整用からコンテナ -->
@@ -28,99 +39,51 @@
         <div class="col-1 col-md-2"></div><!--  コンテナサイズ調整用からコンテナ -->
         <div class="card col-10 col-md-8 h-25">
             <div class="card-body">
+                <div class="card-body bg-primary">
+                    <div class="top_image row"><img src="{{ user.top_image.url }}" class="img-fluid"></div>
+                </div>
                 <form action="" method="POST" enctype="multipart/form-data">
                     {{ form.non_field_errors }}
-                    <div class="cord-body">
-                        <div class="top_image row"><img src="{{ user.top_image.url }}" class="img-fluid"></div>
-                        <div class="change_top_image row">{{ form.top_image }}</div>
+                    <div class="form-group"><!--  後で取り掛かる -->
+                        <div class="input_size" style="width:300px;">{{ form.top_image }}</div>
                     </div>
-
-
-
-
-                        <div class="row">
-                            <div class="col-6">
-                                <tr>
-                                    <th><label for="{{ form.last_name.label }}">{{ form.last_name.label }}</label></th>
-                                    <td>{{ form.last_name }}</td>
-                                </tr>
-                            </div>
-                            <div class="col-6">
-                                <tr>
-                <th><label for="{{ form.first_name.label }}">{{ form.first_name.label }}</label></th>
-                <td>{{ form.first_name }}</td>
-            </tr>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-6">
-            <tr>
-                <th><label for="{{ form.nick_name.label }}">{{ form.nick_name.label }}</label></th>
-                <td>{{ form.nick_name }}</td>
-            </tr>
-        </div>
-        <div class="col-6">
-            <tr>
-                <th><label for="{{ form.request_fee.label }}">{{ form.request_fee.label }}</label></th>
-                <td>{{ form.request_fee }}</td>
-            </tr>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-6">
-            <tr>
-                <th><label for="{{ form.twitter.label }}" placeholder="info@example.com">{{ form.twitter.label }}</label></th>
-                <td>{{ form.twitter }}</td>
-            </tr>
-        </div>
-        <div class="col-6">
-            <tr>
-                <th><label for="{{ form.instagram.label }}">{{ form.instagram.label }}</label></th>
-                <td>{{ form.instagram }}</td>
-            </tr>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-6">
-            <tr>
-                <th><label for="{{ form.area.label }}">{{ form.area.label }}</label></th>
-                <td>{{ form.area }}</td>
-            </tr>
-        </div>
-        <div class="col-6">
-            <tr>
-                <th><label for="{{ form.skill.label }}">{{ form.skill.label }}</label></th>
-                <td>{{ form.skill }}</td>
-            </tr>
-        </div>
-    </div>
-        <div class="row">
-        <div class="col-8">
-            <tr>
-                <th><label for="{{ form.portfolio.label }}">{{ form.portfolio.label }}</label></th>
-                <td>{{ form.portfolio }}</td>
-            </tr>
-        </div>
-        <div class="col-4">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-8">
-            <tr>
-                <th><label for="{{ form.self_introduction.label }}">{{ form.self_introduction.label }}</label></th>
-                <td>{{ form.self_introduction }}</td>
-            </tr>
-        </div>
-        <div class="col-4">
-        </div>
-    </div>
-    {% csrf_token %}
-<button type="submit" class="btn btn-success btn-lg" >編集を確定</button>
-</form>
-
-
-
+                    <div class="form-group">
+                        <label for="{{ form.nick_name.label }}" class="pr_label">{{ form.nick_name.label }}</label>
+                        <div class="input_size" style="width:300px;">{{ form.nick_name }}</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.skill.label }}">{{ form.skill.label }}</label>
+                        <div class="input_size" style="width:300px;">{{ form.skill }}</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.request_fee.label }}">{{ form.request_fee.label }}</label>
+                        <div class="input_size" style="width:300px;">{{ form.request_fee }}</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.twitter.label }}">{{ form.twitter.label }}</label>
+                        <div class="input_size" style="width:300px;">{{ form.twitter }}</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.instagram.label }}">{{ form.instagram.label }}</label>
+                        <div class="input_size" style="width:300px;">{{ form.instagram }}</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.area.label }}">{{ form.area.label }}</label>
+                        <div class="input_size" style="width:300px;">{{ form.area }}</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.portfolio.label }}">{{ form.portfolio.label }}</label>
+                        {{ form.portfolio }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.self_introduction.label }}">{{ form.self_introduction.label }}</label>
+                        {{ form.self_introduction }}
+                    </div>
+                    {% csrf_token %}
+                    <div class="text-center py-4">
+                        <button type="submit" class="btn btn-danger btn-lg" style="width:300px;">編集を確定</button>
+                    </div>
+                </form>
             </div>
         </div>
         <div class="col-1 col-md-2"></div><!--  コンテナサイズ調整用からコンテナ -->
@@ -137,8 +100,14 @@
     </div>
 </div>
 
-
-
-
-
-{% endblock %}
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+</body>
