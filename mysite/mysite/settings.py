@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'register',
     'social_django',
+    'django_cleanup',
 ]
 
 MIDDLEWARE = [

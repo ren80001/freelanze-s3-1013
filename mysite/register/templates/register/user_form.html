@@ -38,13 +38,18 @@
     <div class="row">
         <div class="col-1 col-md-2"></div><!--  コンテナサイズ調整用からコンテナ -->
         <div class="card col-10 col-md-8 h-25">
+            <div class="row bg-danger">
+                {% if user.top_image %}
+                <div class="top_image row"><img src="{{ user.top_image.url }}" class="img-fluid"></div>
+                {% else %}
+                <img class="img-fluid" src="/media/freelanze-top-image.png" style="margin-top: 55px"><!--デフォルトアンノーン画像表示 -->
+                {% endif %}
+            </div>
             <div class="card-body">
-                <div class="card-body bg-primary">
-                    <div class="top_image row"><img src="{{ user.top_image.url }}" class="img-fluid"></div>
-                </div>
                 <form action="" method="POST" enctype="multipart/form-data">
                     {{ form.non_field_errors }}
-                    <div class="form-group"><!--  後で取り掛かる -->
+                    <div class="form-group mt-2"><!--  後で取り掛かる -->
+                        <label for="{{ form.top_image.label }}" class="pr_label">画像を編集する</label>
                         <div class="input_size" style="width:300px;">{{ form.top_image }}</div>
                     </div>
                     <div class="form-group">

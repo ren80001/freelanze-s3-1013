@@ -41,8 +41,12 @@
         <div class="col-1 col-md-2"></div><!--  コンテナサイズ調整用からコンテナ -->
         <div class="card col-10 col-md-8 h-25">
             <div class="card-body">
-                <div class="card-body py-2 text-center bg-primary" id="top">
-                    <div class="top_image row"><img src="{{ user.top_image.url }}" class="img-fluid"></div>
+                <div class="card-body py-2 text-center bg-primary">
+                    {% if user.top_image %}
+                     <div class="top_image row"><img src="{{ user.top_image.url }}" class="img-fluid"></div>
+                    {% else %}
+                     <img class="img-fluid" src="/media/freelanze-top-image.png" style="margin-top: 55px"><!--デフォルトアンノーン画像表示 -->
+                    {% endif %}
                     <div class="nick_name"><h4>{{ user.nick_name }}</h4></div>
                     <div class="name"><h6>{{ user.last_name }} {{ user.first_name }}</h6></div>
                 </div>
