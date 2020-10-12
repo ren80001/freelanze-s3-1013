@@ -20,8 +20,8 @@
     <div class="row">
         <div class="col-1 col-md-2"></div>
         <div class="col-10 col-md-8 h-25">
-            <div class="text-center">
-                <h3 class="my-5">Freelanze</h3>
+            <div class="text-center my-5">
+                <a class="noline" href="{% url 'register:top' %}">Freelanze</a>
             </div>
         </div>
         <div class="col-1 col-md-2"></div><!--  コンテナサイズ調整用からコンテナ -->
@@ -40,27 +40,31 @@
     <div class="row">
         <div class="col-1 col-md-2"></div><!--  コンテナサイズ調整用からコンテナ -->
         <div class="card col-10 col-md-8 h-25">
-            <div class="card-body">
-                <div class="card-body py-2 text-center bg-primary">
+            <div class="text-image" style="background: url(/media/background-image.png);">
+                <div class="text-center">
                     {% if user.top_image %}
-                     <div class="top_image row"><img src="{{ user.top_image.url }}" class="img-fluid"></div>
+                    <img class="detail_top_image mt-3" src="{{ user.top_image.url }}">
                     {% else %}
-                     <img class="img-fluid" src="/media/freelanze-top-image.png" style="margin-top: 55px"><!--デフォルトアンノーン画像表示 -->
+                    <img class="detail_top_image mt-3" src="/media/unknown_image.png"><!--デフォルトアンノーン画像表示 -->
                     {% endif %}
-                    <div class="nick_name"><h4>{{ user.nick_name }}</h4></div>
-                    <div class="name"><h6>{{ user.last_name }} {{ user.first_name }}</h6></div>
+                    <div class="detail_name"><h4>{{ user.nick_name }}</h4></div>
+                    <div class="detail_name"><h6>{{ user.last_name }} {{ user.first_name }}</h6></div>
                 </div>
-
+            </div>
+            <div class="card-body">
+                {% if user.self_introduction %}
                 <div class="card-body py-5">
                     <div class="pr row"><h3>概要</h3></div>
                     <div class="pr row">{{ user.self_introduction | linebreaksbr}}</div>
                 </div>
+                {% endif %}
+
+                {% if user.portfolio %}
                 <div class="card-body py-2">
                     <div class="pf row"><h3>作品など</h3></div>
-                    {% if user.portfolio %}
                     <div class="pf row">{{ user.portfolio | linebreaksbr}}</div>
-                    {% endif %}
                 </div>
+                {% endif %}
                 <div class="card-body py-4">
                     <div class="job row">
                         <h4>

@@ -18,8 +18,8 @@
     <div class="row">
         <div class="col-1 col-md-2"></div>
         <div class="col-10 col-md-8 h-25">
-            <div class="text-center">
-                <a href="{% url 'register:top' %}"><h3 class="my-5">Freelanze</h3></a>
+            <div class="text-center my-5">
+                <a class="noline" href="{% url 'register:top' %}">Freelanze</a>
             </div>
         </div>
         <div class="col-1 col-md-2"></div><!--  コンテナサイズ調整用からコンテナ -->
@@ -38,11 +38,11 @@
     <div class="row">
         <div class="col-1 col-md-2"></div><!--  コンテナサイズ調整用からコンテナ -->
         <div class="card col-10 col-md-8 h-25">
-            <div class="row bg-danger">
+            <div class="text-image" style="background: url(/media/background-image.png);">
                 {% if user.top_image %}
-                <div class="top_image row"><img src="{{ user.top_image.url }}" class="img-fluid"></div>
+                <img class="detail_top_image my-3" src="{{ user.top_image.url }}">
                 {% else %}
-                <img class="img-fluid" src="/media/freelanze-top-image.png" style="margin-top: 55px"><!--デフォルトアンノーン画像表示 -->
+                <img class="detail_top_image my-3" src="/media/unknown_image.png"><!--デフォルトアンノーン画像表示 -->
                 {% endif %}
             </div>
             <div class="card-body">
