@@ -2,16 +2,78 @@
 {% block title %}Topページ{% endblock %}
 {% block content %}
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-12" style="mx-auto">
-            <p class="text-center"><span class="bg-white text-primary">＼新着フリーランス一覧／</span></p>
+<!-- ナビバー -->
+<nav class="navbar navbar-light bg-white fixed-top shadow-sm">
+    <div class="container">
+
+        <div class="row w-100 w-sm-75 mx-auto">
+
+            <div class="col-4 col-sm-4 order-sm-0">
+                <a class="navbar-brand" href="{% url 'register:top' %}">
+                    <img src="https://django-for-s3.s3-ap-northeast-1.amazonaws.com/static/media/freelanzeicon.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                    Freelanze
+                </a>
+            </div>
+
+            <div class="col-8 col-sm-8 order-sm-3">
+                <div class="float-right pt-1">
+                    {% if user.is_authenticated %}
+                    <a class="btn btn-outline-primary" id="name11" href="{% url 'register:user_detail' user.pk %}" role="button"><font size="2">マイページ</font></a>
+                    <a class="btn btn-danger" href="{% url 'register:logout' %}" role="button"><font size="2">ログアウト</font></a>
+                    {% else %}
+                    <a class="btn btn-success" href="{% url 'register:test_login' %}" role="button"><font size="2">test</font></a>
+                    <a class="btn btn-outline-primary" href="{% url 'register:login' %}" role="button"><font size="2">ログイン</font></a>
+                    <a class="btn btn-danger" href="{% url 'register:sign_up' %}" role="button"><font size="2">新規会員登録</font></a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-8 order-sm-1">
+                <form class="form-inline my-0 pt-1" action="/search" method="get" accept-charset="utf-8">
+                    <div class="form-group mb-0 flex-grow-1">
+                        <input id="form" type="search" class="col-12 form-control mr-sm-2" placeholder="キーワードで検索" aria-label="検索...">
+                    </div>
+                    <button type="submit" class="btn btn-outline-info my-0">検索</button>
+                </form>
+            </div>
+
+            <div class="col-5 col-sm-4 order-sm-2"><!--ドロップダウンボタン部分-->
+                <div class="btn-group pt-1">
+                    <button type="button" class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <font size="2">スキルで絞り込む</font>
+                    </button>
+                    <form class="form-inline my-2 my-lg-0" action="" method="get" accept-charset="utf-8">
+                        <div class="dropdown-menu">
+                            <button class="dropdown-item" type="submit" value="1" name="q">Webデザイナー</button>
+                            <button class="dropdown-item" type="submit" value="2" name="q">PG(フロントサイド)</button>
+                            <button class="dropdown-item" type="submit" value="3" name="q">PG（サーバーサイド）</button>
+                            <button class="dropdown-item" type="submit" value="4" name="q">デザイナー</button>
+                            <button class="dropdown-item" type="submit" value="5" name="q">フォトグラファー</button>
+                            <button class="dropdown-item" type="submit" value="6" name="q">イラストレーター</button>
+                            <button class="dropdown-item" type="submit" value="7" name="q">ライター</button>
+                            <button class="dropdown-item" type="submit" value="8" name="q">ブロガー</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+</nav>
 
-<!--表示カード調整中-->
-<div class="container">
+<main><!-- メインコンテンツ -->
+<div class="container-fluid">
+    <div class="row"><!-- top画像 -->
+        <img class="img-fluid" src="https://django-for-s3.s3-ap-northeast-1.amazonaws.com/media/freelanze-top-image.png">
+    </div>
+
+    <div class="row bg-white pt-4">
+        <div class="col-12" style="mx-auto">
+            <p class="text-center">＼新着フリーランス一覧／</p>
+        </div>
+    </div>
+
+<!--表示カード-->
+<div class="container pt-3">
   <div class="row">
        {% for product in user_list %}
         <div class="col-6 col-md-4 col-lg-3 mb-2">
@@ -28,11 +90,74 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div><!--表示カードデザインはここまで-->
+
+      <!--モーダルデザイン-->
+      <div class="modal fade" id="{{ product.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="ml-auto">
+                            <h5 class="modal-title" id="exampleModalLabel">「{{ product.nick_name }}」の詳細情報</h5>
+                        </div>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-6">
+                                    {% if product.top_image %}
+                                    <img class="card-img-top mt-1" src="{{ product.top_image.url }}">
+                                    {% else %}
+                                    <img class="card-img-top mt-1" src="https://django-for-s3.s3-ap-northeast-1.amazonaws.com/static/media/unknown_image.png"><!--デフォルトアンノーン画像表示 -->
+                                    {% endif %}
+                                </div>
+                                <div class="col-6"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <p class='border-bottom pt-3'>■ニックネーム：{{ product.nick_name }}</p>
+                                    <p class='border-bottom pt-2'>■職種：{{ product.get_skill_display }}</p>
+                                    <p class='border-bottom pt-2'>■活動地域：{{ product.get_area_display }}</p>
+                                    <p class='border-bottom pt-2'>■依頼料：{{ product.get_request_fee_display }}</p>
+                                    {% if product.portfolio %}
+                                    <p>■ポートフォリオ一覧<br>{{ product.portfolio | linebreaksbr }}</br></p>
+                                    {% endif %}
+                                    {% if product.self_introduction %}
+                                    <p>■自己PR<br>{{ product.self_introduction | linebreaksbr }}</br></p>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="row"><!-- モーダル内のSNS部分 -->
+                                <div class="col ml-1">
+                                    {% if product.twitter %}
+                                    <a href="{{ product.twitter }}"><i class="fab fa-twitter fa-2x my-example fa-fw"></i></a>
+                                    {% endif %}
+                                    {% if product.instagram %}
+                                    <a href="{{ product.instagram }}"><i class="fab fa-instagram fa-2x my-example fa-fw"></i></a>
+                                    {% endif %}
+                                </div>
+                            </div><!-- モーダル内のSNS部分終了 -->
+                        </div>
+                    </div>
+
+                    <div class="modal-footer"><!-- モーダルフッダー -->
+                        <div class="mx-auto">
+                            <a href="mailto:{{ product.email }}">
+                                <button type="submit" class="btn btn-outline-info" style="width:300px;">直接メールでお仕事の依頼をする</button>
+                            </a>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                        </div>
+                    </div><!-- /.modal-footer -->
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
       {% endfor %}
   </div>
 </div>
-
 
 <!--ページネーション↓-->
 <nav aria-label="Page navigation">
@@ -63,8 +188,6 @@
     {% endif %}
 </ul>
 </nav>
-
-
 
 <!--ページネーション↑-->
 <div class="container-fluid">
@@ -142,5 +265,6 @@
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
 </div>
-
+</main>
 {% endblock %}
+

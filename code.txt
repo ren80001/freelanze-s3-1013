@@ -4,3 +4,5 @@ python manage.py makemigrations
 
 python manage.py migrate
 
+
+#AWS S3 参考サイト
