@@ -184,23 +184,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         """
         return self.email
 
-
-
-    def save_and_rename(self, url, name=None):
-
-        """画像保存"""
-        res = requests.get(url)
-        if res.status_code != 200:
-            return "No Image"
-        path = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/media/image/"
-        if name == None:
-            path += url.split("/")[-1]
-        else:
-            path += name
-        with open(path, 'wb') as file:
-            file.write(res.content)
-        return path
-
 class Likes(models.Model):
     """Likeモデル"""
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
