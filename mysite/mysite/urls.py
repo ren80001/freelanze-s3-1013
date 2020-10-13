@@ -10,7 +10,7 @@ urlpatterns = [
     path('auth/', include('social_django.urls', namespace='social')),  # <- Here#　
     path('', include('social_django.urls')),
 
-]
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

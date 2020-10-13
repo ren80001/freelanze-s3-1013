@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '@v1wn)gp3km4%wezxd2v%da-t^q^h-(4_@x@lad)ux!q0hhf%*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'register',
     'social_django',
     'django_cleanup',
+    'storages',  #aws s3
 ]
 
 MIDDLEWARE = [
@@ -123,12 +124,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    [
-        os.path.join(BASE_DIR, "static"),
-    ]
-)
+
+
 AUTH_USER_MODEL = 'register.User'
 
 LOGIN_URL = 'register:login'
@@ -137,8 +134,6 @@ LOGOUT_REDIRECT_URL = 'register:top'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
 
 AUTHENTICATION_BACKENDS = (
  'social_core.backends.open_id.OpenIdAuth',  # for Google authentication
@@ -151,3 +146,28 @@ AUTHENTICATION_BACKENDS = (
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '622750814458-bin0vv90qu1fk7dindld6b1pnf6cpa7n.apps.googleusercontent.com'  #Paste CLient Key
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'SY7YTUMLRql8bON2F1yW-2CC' #Paste Secret Key
+
+
+
+#aws-s3設定郡
+AWS_ACCESS_KEY_ID = 'AKIARDZQVJXGT54HZZ5W'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'django-for-s3'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_LOCATION = 'static'
+AWS_DEFAULT_ACL = None
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+STATICFILES_DIRS = (
+    [
+        os.path.join(BASE_DIR, "static"),
+    ]
+)
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+
+MEDIA_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
