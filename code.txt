@@ -6,3 +6,4 @@ python manage.py migrate
 
 
 #AWS S3 参考サイト
+pip install django-storages

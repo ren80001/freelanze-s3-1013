@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '@v1wn)gp3km4%wezxd2v%da-t^q^h-(4_@x@lad)ux!q0hhf%*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = False #AWS s3　用にTrueからFalseへ
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*'] #AWS s3　用
 
 
 # Application definition
@@ -146,8 +146,6 @@ AUTHENTICATION_BACKENDS = (
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '622750814458-bin0vv90qu1fk7dindld6b1pnf6cpa7n.apps.googleusercontent.com'  #Paste CLient Key
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'SY7YTUMLRql8bON2F1yW-2CC' #Paste Secret Key
-
-
 
 #aws-s3設定郡
 AWS_ACCESS_KEY_ID = 'AKIARDZQVJXGT54HZZ5W'

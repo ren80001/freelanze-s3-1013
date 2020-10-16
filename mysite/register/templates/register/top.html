@@ -21,7 +21,7 @@
                     <a class="btn btn-outline-primary" id="name11" href="{% url 'register:user_detail' user.pk %}" role="button"><font size="2">マイページ</font></a>
                     <a class="btn btn-danger" href="{% url 'register:logout' %}" role="button"><font size="2">ログアウト</font></a>
                     {% else %}
-                    <a class="btn btn-success" href="{% url 'register:test_login' %}" role="button"><font size="2">test</font></a>
+                    <a class="btn btn-success" href="{% url 'register:Guest_login' %}" role="button"><font size="2">Guest</font></a>
                     <a class="btn btn-outline-primary" href="{% url 'register:login' %}" role="button"><font size="2">ログイン</font></a>
                     <a class="btn btn-danger" href="{% url 'register:sign_up' %}" role="button"><font size="2">新規会員登録</font></a>
                     {% endif %}

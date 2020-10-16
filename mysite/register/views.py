@@ -23,8 +23,10 @@ from .forms import (
     LoginForm, UserCreateForm, UserUpdateForm,
     MyPasswordResetForm, MySetPasswordForm
 )
-
+from django.contrib.auth import login #ゲストログイン追加
 User = get_user_model()
+
+
 
 class AistView(generic.ListView):
     model = User
@@ -70,6 +72,11 @@ class Login(LoginView):
     """ログインページ"""
     form_class = LoginForm
     template_name = 'register/login.html'
+
+class GuestLogin(LoginView):
+    """ゲストログインページ"""
+    form_class = LoginForm
+    template_name = 'register/guest_login.html'
 
 
 class Logout(LoginRequiredMixin, LogoutView):
@@ -209,3 +216,8 @@ class PasswordResetConfirm(PasswordResetConfirmView):
 class PasswordResetComplete(PasswordResetCompleteView):
     """新パスワード設定しましたページ"""
     template_name = 'register/password_reset_complete.html'
+
+
+
+
+
