@@ -31,7 +31,7 @@
             <div class="col-12 col-sm-8 order-sm-1">
                 <form class="form-inline my-0 pt-1" action="/search" method="get" accept-charset="utf-8">
                     <div class="form-group mb-0 flex-grow-1">
-                        <input id="form" type="search" class="col-12 form-control mr-sm-2" placeholder="キーワードで検索" aria-label="検索...">
+                        <input id="form" name="q" value="{{ request.GET.q }}" type="search" class="col-12 form-control mr-sm-2" placeholder="キーワードで検索" aria-label="検索...">
                     </div>
                     <button type="submit" class="btn btn-outline-info my-0">検索</button>
                 </form>
