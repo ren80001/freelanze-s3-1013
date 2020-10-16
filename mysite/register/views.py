@@ -217,7 +217,3 @@ class PasswordResetComplete(PasswordResetCompleteView):
     """新パスワード設定しましたページ"""
     template_name = 'register/password_reset_complete.html'
 
-
-
-
-

@@ -85,6 +85,7 @@
                     <img class="card-img-top mt-1" src="https://django-for-s3.s3-ap-northeast-1.amazonaws.com/static/media/unknown_image.png"><!--デフォルトアンノーン画像表示 -->
                     {% endif %}
                     <div class="card-body">
+                        <h6 class="card-skill">{{ product.nick_name}}</h6>
                         <h6 class="card-skill">{{ product.get_skill_display }}</h6>
                         <p class="card-text">{{ product.get_request_fee_display }}</p>
                     </div>

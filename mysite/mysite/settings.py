@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '@v1wn)gp3km4%wezxd2v%da-t^q^h-(4_@x@lad)ux!q0hhf%*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False #AWS s3　用にTrueからFalseへ
+DEBUG = True #AWS s3　用にTrueからFalseへ
 
 ALLOWED_HOSTS = ['*'] #AWS s3　用
 
