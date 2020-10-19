@@ -1,5 +1,5 @@
 {% extends "register/base.html" %}
-{% block title %}Topページ{% endblock %}
+{% block title %}検索ページ{% endblock %}
 {% block content %}
 
 <!-- ナビバー -->
@@ -62,22 +62,22 @@
 
 <main><!-- メインコンテンツ -->
 <div class="container-fluid">
-    <div class="row bg-dark pt-4">
-        <div class="col-12" style="mx-auto"></div>
-    </div>
-    <div class="row"><!-- top画像 -->
-        <img class="img-fluid" src="https://django-for-s3.s3-ap-northeast-1.amazonaws.com/media/freelanze-top-image.png" style="padding-top:55px;">
-    </div>
 
+    {% if user_list %}
+    {% for result in user_list %}
+    <div class="ui segment message">
+        <h3><a href=""></a></h3>
+        <p>{{result.message | truncatewords:30}}</p>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="ui segment warning message">
+        <p>検索結果はありません。</p>
+    </div>
+    {% endif %}
     <div class="row bg-white pt-4">
         <div class="col-12" style="mx-auto">
-            {% if messages %}
-            {% for message in messages %}
-            <h4 class="text-center">{{ message }}</h4>
-            {% endfor %}
-            {% else %}
-            <h4 class="text-center">＼新着フリーランス一覧／</h4>
-            {% endif %}
+            <p class="text-center">＼新着フリーランス一覧／</p>
         </div>
     </div>
 </div>
@@ -165,7 +165,6 @@
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
-
       {% endfor %}
   </div>
     <div class="row mx-auto float-right">

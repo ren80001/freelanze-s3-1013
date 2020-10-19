@@ -9,8 +9,8 @@ from django.shortcuts import redirect, resolve_url
 from django.template.loader import render_to_string
 from django.views import generic
 
-
 from django.db.models import Q
+from django.contrib import messages
 
 from django.contrib.auth.views import (
     LoginView, LogoutView,
@@ -23,7 +23,7 @@ from .forms import (
     LoginForm, UserCreateForm, UserUpdateForm,
     MyPasswordResetForm, MySetPasswordForm
 )
-from django.contrib.auth import login #ゲストログイン追加
+
 User = get_user_model()
 
 
@@ -49,12 +49,14 @@ class ListView(generic.ListView):
     template_name = 'register/top.html'
     paginate_by = 8
 
+
     def get_queryset(self):
         result = super(ListView, self).get_queryset()
         query = self.request.GET.get('q')
 
         if query:
             result = User.objects.filter(Q(nick_name__icontains=query) | Q(self_introduction__icontains=query))
+            messages.success(self.request, '「{}」の検索結果'.format(query))
 
         return result
 
