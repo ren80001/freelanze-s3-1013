@@ -27,35 +27,25 @@ from .forms import (
 User = get_user_model()
 
 
-
-class AistView(generic.ListView):
+class TopView(generic.ListView):
     model = User
     template_name = 'register/top.html'
     paginate_by = 8
     queryset = User.objects.order_by('-created_at')
 
-    def get_queryset(self):
-        result = super(AistView, self).get_queryset()
-        query = self.request.GET.get('q')
-
-        if query:
-            result = User.objects.filter(Q(skill__icontains=query))
-
-        return result
 
 class ListView(generic.ListView):
+    """検索による表示結果"""
     model = User
-
     template_name = 'register/top.html'
     paginate_by = 8
-
 
     def get_queryset(self):
         result = super(ListView, self).get_queryset()
         query = self.request.GET.get('q')
 
         if query:
-            result = User.objects.filter(Q(nick_name__icontains=query) | Q(self_introduction__icontains=query))
+            result = User.objects.filter(Q(nick_name__icontains=query) | Q(self_introduction__icontains=query) | Q(skill__icontains=query))
             messages.success(self.request, '「{}」の検索結果'.format(query))
 
         return result
