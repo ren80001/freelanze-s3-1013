@@ -147,7 +147,8 @@ AUTHENTICATION_BACKENDS = (
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '622750814458-bin0vv90qu1fk7dindld6b1pnf6cpa7n.apps.googleusercontent.com'  #Paste CLient Key
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'SY7YTUMLRql8bON2F1yW-2CC' #Paste Secret Key
 
-#aws-s3設定郡
+
+"""aws-s3設定郡"""
 AWS_ACCESS_KEY_ID = 'AKIARDZQVJXGT54HZZ5W'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'django-for-s3'
@@ -169,3 +170,4 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 MEDIA_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+"""aws-s3設定郡終了"""

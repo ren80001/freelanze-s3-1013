@@ -1,7 +1,6 @@
 {% extends "register/base.html" %}
-{% block title %}Topページ{% endblock %}
+{% block title %}ユーザーの詳細ページ{% endblock %}
 {% block content %}
-
 <!-- ナビバー -->
 <nav class="navbar navbar-light bg-white fixed-top shadow-sm">
     <div class="container">
@@ -59,81 +58,82 @@
         </div>
     </div>
 </nav>
+<!-- ナビバー終了 -->
 
-<main><!-- メインコンテンツ -->
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-12 mt-sm-n5" style="mx-auto"></div>
-    </div>
-    <div class="row"><!-- top画像 -->
-        <img class="img-fluid" src="https://django-for-s3.s3-ap-northeast-1.amazonaws.com/media/freelanze-top-image.png" style="padding-top:55px;">
-    </div>
 
-    <div class="row bg-white pt-4">
-        <div class="col-12" style="mx-auto">
-            {% if messages %}
-            {% for message in messages %}
-            <h4 class="text-center">{{ message }}</h4>
-            {% endfor %}
-            {% else %}
-            <h5 class="text-center">＼新着フリーランス一覧／</h5>
-            {% endif %}
+<div class="container">
+    <div class="row" style="padding-top: 130px;">
+        <div class="col-1 col-md-2"></div><!--  コンテナサイズ調整用からコンテナ -->
+
+        <div class="card col-10 col-md-8 h-25">
+            <div class="text-image" style="background: url(https://django-for-s3.s3-ap-northeast-1.amazonaws.com/static/media/background-image.png);">
+                <div class="text-center">
+                    {% if user.top_image %}
+                    <img class="detail_top_image mt-3" src="{{ user.top_image.url }}">
+                    {% else %}
+                    <img class="detail_top_image mt-3" src="https://django-for-s3.s3-ap-northeast-1.amazonaws.com/static/media/unknown_image.png"><!--デフォルトアンノーン画像表示 -->
+                    {% endif %}
+                    <div class="detail_name"><h4>{{ user.nick_name }}</h4></div>
+                </div>
+            </div>
+            <div class="card-body">
+                {% if user.self_introduction %}
+                <div class="card-body py-4">
+                    <div class="pr row"><h3>概要</h3></div>
+                    <div class="pr row">{{ user.self_introduction | linebreaksbr}}</div>
+                </div>
+                {% endif %}
+
+                {% if user.portfolio %}
+                <div class="card-body py-2">
+                    <div class="pf row"><h3>作品など</h3></div>
+                    <div class="pf row">{{ user.portfolio | linebreaksbr}}</div>
+                </div>
+                {% endif %}
+                <div class="card-body py-4">
+                    <div class="job row">
+                        <h4>
+                        職種：{{ user.get_skill_display }}<br>
+                        活動場所：{{ user.get_area_display }}<br>
+                        依頼料：{{ user.get_request_fee_display }}<br>
+                        </h4>
+                    </div>
+                </div>
+                <div class="card-body pt-4 text-center">
+                    <a href="mailto:{{ product.email }}">
+                        <button type="submit" class="btn btn-outline-info my-2 my-sm-0" style="width:300px;">直接メールでお仕事の依頼をする</button>
+                    </a>
+                </div>
+            </div>
         </div>
+        <div class="col-1 col-md-2"></div><!--  コンテナサイズ調整用からコンテナ -->
     </div>
-</div>
-<!--表示カード-->
-<div class="container pt-4">
-  <div class="row">
-      {% for product in user_list %}
-      <div class="col-6 col-md-4 col-lg-3 mb-2">
-          <a href="{% url 'register:detail' pk=product.id %}" class="card noline1" style="width: 100%;">
-              {% if product.top_image %}
-              <img class="card-img-top mt-1" src="{{ product.top_image.url }}">
-              {% else %}
-              <img class="card-img-top mt-1" src="https://django-for-s3.s3-ap-northeast-1.amazonaws.com/static/media/unknown_image.png"><!--デフォルトアンノーン画像表示 -->
-              {% endif %}
-              <div class="card-body">
-                  <h6 class="card-skill">{{ product.nick_name}}</h6>
-                  <h6 class="card-skill">{{ product.get_skill_display }}</h6>
-                  <p class="card-text">{{ product.get_request_fee_display }}</p>
-              </div>
-          </a>
-      </div><!--表示カードデザインはここまで-->
-      {% endfor %}
-  </div>
-    <div class="row mx-auto float-right">
-        <!--ページネーション↓-->
-        <nav aria-label="Page navigation">
-            <ul class="pagination justify-content-end">
-                <!-- 前へ の部分 -->
-                {% if page_obj.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                {% endif %}
-                <!-- 数字の部分 -->
-                {% for num in page_obj.paginator.page_range %}
-                {% if page_obj.number == num %}
-                <li class="page-item active"><a class="page-link" href="#!">{{ num }}</a></li>
-                {% else %}
-                <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
-                {% endif %}
-                {% endfor %}
-                <!-- 次へ の部分 -->
-                {% if page_obj.has_next %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-                {% endif %}
-            </ul>
-        </nav>
-    </div>
-</div>
 
-</main>
+    <div class="row"><!--  SNSコンテナ -->
+        <div class="col-1 col-md-2"></div><!--  コンテナサイズ調整用からコンテナ -->
+        {% if user.twitter or user.instagram %}
+        <div class="card col-10 col-md-8 h-25">
+            <div class="card-body text-center">
+                {% if user.twitter %}
+                <a href="{{ user.twitter }}"><i class="fab fa-twitter fa-3x my-example fa-fw"></i></a>
+                {% endif %}
+                {% if user.instagram %}
+                <a href="{{ user.instagram }}"><i class="fab fa-instagram fa-3x my-example fa-fw"></i></a>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+        <div class="col-1 col-md-2"></div><!--  コンテナサイズ調整用からコンテナ -->
+    </div><!--  SNSコンテナ終了 -->
+
+    <div class="row">
+        <div class="col-1 col-md-2"></div><!--  コンテナサイズ調整用からコンテナ -->
+        <div class="col-10 col-md-8 h-25">
+            <div class="text-center">
+                <h6 class="my-5">早速お仕事の依頼を行ってみましょう。</h6>
+            </div>
+        </div>
+        <div class="col-1 col-md-2"></div><!--  コンテナサイズ調整用からコンテナ -->
+    </div>
+</div>
 {% endblock %}
-

@@ -5,7 +5,7 @@ app_name = 'register'
 
 urlpatterns = [
     path('', views.TopView.as_view(), name='top'),
-    path('<int:pk>/', views.DetailView.as_view(), name='datail_view'),
+    path('<int:pk>/', views.DetailView.as_view(), name='detail'),
     path('login/', views.Login.as_view(), name='login'),
     path('Guest_login/', views.GuestLogin.as_view(), name='Guest_login'),
     path('sign_up/', views.SignUp.as_view(), name='sign_up'),

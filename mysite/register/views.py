@@ -37,7 +37,7 @@ class TopView(generic.ListView):
 class ListView(generic.ListView):
     """検索による表示結果"""
     model = User
-    template_name = 'register/top.html'
+    template_name = 'register/search_datail.html'
     paginate_by = 8
 
     def get_queryset(self):
@@ -53,7 +53,7 @@ class ListView(generic.ListView):
 
 class DetailView(generic.DetailView):
     model = User
-    template_name = 'register/top.html'
+    template_name = 'register/detail.html'
 
 
 class SignUp(LoginView):

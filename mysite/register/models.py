@@ -132,6 +132,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     request_fee = models.CharField(_('依頼料'), max_length=20, choices=REQUESTS, blank=False)
     portfolio = models.CharField(_('ポートフォリオ'), max_length=150, blank=True)
     self_introduction = models.CharField(_('自己PR'), max_length=500, blank=True)
+    like = models.IntegerField(default=0)
     created_at = models.DateTimeField(default=timezone.now)
 
 
