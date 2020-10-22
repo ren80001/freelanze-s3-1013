@@ -26,13 +26,14 @@ from .forms import (
 
 User = get_user_model()
 
-from django.http import Http404
+from django.http import Http404, JsonResponse
 
 class TopView(generic.ListView):
     model = User
     template_name = 'register/top.html'
     paginate_by = 8
-    queryset = User.objects.order_by('-created_at')
+    queryset = User.objects.order_by('created_at')
+    products = User.objects.order_by('like')
 
 
 class ListView(generic.ListView):
@@ -207,7 +208,12 @@ class PasswordResetComplete(PasswordResetCompleteView):
     """新パスワード設定しましたページ"""
     template_name = 'register/password_reset_complete.html'
 
+
 def like(request, pk):
+    """いいね機能郡"""
+    if not user.is_active:
+        return redirect('register:top')
+
     try:
         user = User.objects.get(pk=pk)
     except User.DoesNotExist:
@@ -215,3 +221,14 @@ def like(request, pk):
     user.like += 1 # ここでいいねの数を増やす
     user.save() # 保存をする
     return redirect('register:detail', pk=pk)
+
+def api_like(request, pk):
+    """いいね後ページをロードさせない"""
+    try:
+        user = User.objects.get(pk=pk)
+    except User.DoesNotExist:
+        raise Http404
+    user.like += 1  # ここでいいねの数を増やす
+    user.save()  # 保存をする
+
+    return JsonResponse({"like":user.like})

@@ -132,6 +132,41 @@
             </ul>
         </nav>
     </div>
+    <div class="row pt-5">
+        <div class="col-12" style="mx-auto">
+            <h5 class="text-center"></h5>
+        </div>
+    </div>
+</div>
+    <!--サブコンテンツ-->
+<div class="container-fluid">
+    <div class="row pt-4">
+        <div class="col-12" style="mx-auto">
+            <h5 class="text-center">＼人気フリーランス一覧／</h5>
+        </div>
+    </div>
+</div>
+<div class="container pt-4">
+  <div class="row">
+      {% for product in user_list %}
+      <div class="col-12 col-sm-6 mb-2">
+          <a href="{% url 'register:detail' pk=product.id %}" class="card noline1" style="width: 100%;">
+              {% if product.top_image %}
+              <img class="card-img-top mt-1" src="{{ product.top_image.url }}">
+              {% else %}
+              <img class="card-img-top mt-1" src="https://django-for-s3.s3-ap-northeast-1.amazonaws.com/static/media/unknown_image.png"><!--デフォルトアンノーン画像表示 -->
+              {% endif %}
+              <div class="card-body">
+                  <h5 class="card-skill pd-0">{{ product.like }}いいね！</h5>
+                  <h6 class="card-skill">{{ product.portfolio}}</h6>
+                  <h6 class="card-skill">{{ product.nick_name}}</h6>
+                  <h6 class="card-skill pd-0">{{ product.get_skill_display }}</h6>
+                  <p class="card-text pt-0">{{ product.get_request_fee_display }}</p>
+              </div>
+          </a>
+      </div><!--表示カードデザインはここまで-->
+      {% endfor %}
+  </div>
 </div>
 
 </main>

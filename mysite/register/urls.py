@@ -21,4 +21,5 @@ urlpatterns = [
     path('password_reset/confirm/<uidb64>/<token>/', views.PasswordResetConfirm.as_view(), name='password_reset_confirm'),
     path('password_reset/complete/', views.PasswordResetComplete.as_view(), name='password_reset_complete'),
     path("<int:pk>/like/", views.like, name="like"),
+    path("api/like/<int:pk>/", views.api_like, name="api_like"),
 ]

@@ -73,7 +73,7 @@
                     {% else %}
                     <img class="detail_top_image mt-3" src="https://django-for-s3.s3-ap-northeast-1.amazonaws.com/static/media/unknown_image.png"><!--デフォルトアンノーン画像表示 -->
                     {% endif %}
-                    <div class="detail_name"><h4>{{ user.nick_name }}</h4></div>
+                    <div class="detail_name pt-2"><h4>{{ user.nick_name }}</h4></div>
                 </div>
             </div>
             <div class="card-body">
@@ -90,7 +90,7 @@
                     <div class="pf row">{{ user.portfolio | linebreaksbr}}</div>
                 </div>
                 {% endif %}
-                <div class="card-body py-4">
+                <div class="card-body pt-3">
                     <div class="job row">
                         <h4>
                         職種：{{ user.get_skill_display }}<br>
@@ -98,12 +98,31 @@
                         依頼料：{{ user.get_request_fee_display }}<br>
                         </h4>
                     </div>
+                    <div class="Likes">
+                        <a onclick="api_like()" class="Likes-Icon"></a>
+                    </div>
                 </div>
-                <div class="card-body pt-4 text-center">
+                <div class="card-body"><div class="num pl-4" id="like">{{ user.like }}</div></div>
+                <div class="card-body pt-2 text-center">
                     <a href="mailto:{{ product.email }}">
                         <button type="submit" class="btn btn-outline-info my-2 my-sm-0" style="width:300px;">直接メールでお仕事の依頼をする</button>
                     </a>
-                    <p><a href="{% url 'register:like' user.pk %}"><span id="like">{{ user.like }}</span>いいね！</a></p>
+                    <!-- いいねボタンを押したときの処理 -->
+                    <script>
+                        function api_like() {
+                            var api_url = "{% url 'register:api_like' user.pk %}";
+                            var btn_txt = document.getElementById("like");
+                            var request = new XMLHttpRequest();
+                            request.onreadystatechange = function () {
+                                if (request.readyState === 4 && request.status === 200) {
+                                    var received_data = JSON.parse(request.responseText);
+                                    btn_txt.innerText = received_data.like;
+                                    }
+                                }
+                            request.open("GET",api_url);
+                            request.send();
+                        }
+                    </script>
                 </div>
             </div>
         </div>

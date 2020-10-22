@@ -1,10 +1,15 @@
-formInput();
-function OnButtonClick(){
-    var id = "ren80001@gmail.com";
-    var password = "ren11261126";
+$('.Likes-Icon').on('click', function() {
+    let $btn = $(this);
+    // Likeアイコンがonクラス持っていたら
+    if ($btn.hasClass('on')) {
 
-    var n = $('input[name=username]')[0];
-    n.value = id;
-    n = $('input[name=password]')[0];
-    n.value = password;
-}
+      $btn.removeClass('on');
+      $btn.removeClass("HeartAnimation");
+      $btn.css("background-position","left");
+
+    } else {
+      $btn.addClass('on');
+      $btn.addClass("HeartAnimation");
+
+    }
+});
