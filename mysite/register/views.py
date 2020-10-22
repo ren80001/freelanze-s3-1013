@@ -29,11 +29,17 @@ User = get_user_model()
 from django.http import Http404, JsonResponse
 
 class TopView(generic.ListView):
+    """トップページに新着順で表示"""
     model = User
     template_name = 'register/top.html'
     paginate_by = 8
-    queryset = User.objects.order_by('created_at')
-    products = User.objects.order_by('like')
+    queryset = User.objects.order_by('-created_at')
+
+    def get_context_data(self, **kwargs):
+        """いいねの多い順に表示"""
+        context = super().get_context_data(**kwargs)
+        context["like_list"] = User.objects.order_by('-like')[:5]
+        return context
 
 
 class ListView(generic.ListView):
