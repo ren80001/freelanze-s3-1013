@@ -8,18 +8,6 @@ from django.contrib.auth.forms import (
 User = get_user_model()
 
 
-class SearchForm(forms.Form):
-    title = forms.CharField(
-        initial='',
-        label='タイトル',
-        required = False, # 必須ではない
-    )
-    text = forms.CharField(
-        initial='',
-        label='内容',
-        required=False,  # 必須ではない
-    )
-
 class LoginForm(AuthenticationForm):
     """ログインフォーム"""
 
@@ -49,8 +37,6 @@ class UserCreateForm(UserCreationForm):
 
 class UserUpdateForm(forms.ModelForm):
     """ユーザー情報更新フォーム"""
-
-    forms.ImageField(widget=forms.FileInput)
 
     class Meta:
         model = User

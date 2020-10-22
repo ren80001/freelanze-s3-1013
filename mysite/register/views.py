@@ -26,6 +26,7 @@ from .forms import (
 
 User = get_user_model()
 
+from django.http import Http404
 
 class TopView(generic.ListView):
     model = User
@@ -50,8 +51,8 @@ class ListView(generic.ListView):
 
         return result
 
-
 class DetailView(generic.DetailView):
+    """ユーザーの詳細ページ"""
     model = User
     template_name = 'register/detail.html'
 
@@ -105,9 +106,6 @@ class UserCreate(generic.CreateView):
 
         user.email_user(subject, message)
         return redirect('register:user_create_done')
-
-
-
 
 
 class UserCreateDone(generic.TemplateView):
@@ -209,3 +207,11 @@ class PasswordResetComplete(PasswordResetCompleteView):
     """新パスワード設定しましたページ"""
     template_name = 'register/password_reset_complete.html'
 
+def like(request, pk):
+    try:
+        user = User.objects.get(pk=pk)
+    except User.DoesNotExist:
+        raise Http404
+    user.like += 1 # ここでいいねの数を増やす
+    user.save() # 保存をする
+    return redirect('register:detail', pk=pk)

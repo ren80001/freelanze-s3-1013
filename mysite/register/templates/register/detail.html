@@ -103,6 +103,7 @@
                     <a href="mailto:{{ product.email }}">
                         <button type="submit" class="btn btn-outline-info my-2 my-sm-0" style="width:300px;">直接メールでお仕事の依頼をする</button>
                     </a>
+                    <p><a href="{% url 'register:like' user.pk %}"><span id="like">{{ user.like }}</span>いいね！</a></p>
                 </div>
             </div>
         </div>

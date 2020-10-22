@@ -5,9 +5,8 @@ from django.contrib.auth.base_user import AbstractBaseUser
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 from django.contrib.auth.base_user import BaseUserManager
-"""下記likeモデル"""
 from django.contrib.auth import get_user_model
-
+import requests
 
 SKILLS = (
     ('1', 'Webデザイナー'),
@@ -185,7 +184,15 @@ class User(AbstractBaseUser, PermissionsMixin):
         """
         return self.email
 
-class Likes(models.Model):
-    """Likeモデル"""
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
+    def save_and_rename(self, url, name=None):
+        res = requests.get(url)
+        if res.status_code != 200:
+            return "No Image"
+        path = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/media/media/"
+        if name == None:
+            path += url.split("/")[-1]
+        else:
+            path += name
+        with open(path, 'wb') as file:
+            file.write(res.content)
+        return path
